@@ -16,6 +16,12 @@ return [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
           ],
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                'frontend\migrations',
+            ],
+        ],
     ],
     'components' => [
         'log' => [
@@ -27,5 +33,6 @@ return [
             ],
         ],
     ],
+
     'params' => $params,
 ];
