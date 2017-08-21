@@ -12,6 +12,7 @@ namespace common\widgets;
 use frontend\models\Category;
 use yii\base\Widget;
 use yii\caching\DbDependency;
+use yii;
 
 class MenuWidget extends Widget
 {
@@ -31,18 +32,17 @@ class MenuWidget extends Widget
 
     public function run()
     {
-        $menu = \Yii::$app->cache->get('menu');
+        $menu = Yii::$app->cache->get('menu');
         if ($menu) return $menu;
 
         $this->data = Category::find()->indexBy('id')->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
-
-        $dependecy_cache = new DbDependency([
-            'sql' => 'select max(name) from category',
+        $dependency= new DbDependency([
+            'sql' => 'SELECT max(name) FROM category',
         ]);
-        \Yii::$app->cache->set('menu', $this->menuHtml, 30, $dependecy_cache);
+        Yii::$app->cache->set('menu', $this->menuHtml, 30, $dependency);
 
         return $this->menuHtml;
     }
@@ -70,7 +70,7 @@ class MenuWidget extends Widget
         return $str;
     }
 
-    protected function catToTemplate($category)
+    protected function catToTemplate(/** @noinspection PhpUnusedParameterInspection */ $category)
     {
         ob_start();
         include __DIR__ . '/menu/' . $this->tpl;

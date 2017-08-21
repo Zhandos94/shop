@@ -12,6 +12,14 @@ return [
             'password' => '',
             'charset' => 'utf8',
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'site/index',
+                'category/<id:\d+>' => 'category/view',
+            ],
+        ],
 
     ],
 ];
