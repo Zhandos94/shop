@@ -19,13 +19,13 @@ class m170821_052235_create_product_table extends Migration
             'category_id' => $this->integer(),
             'name' => $this->string(),
             'content' => $this->string(),
-            'price' => $this->float(),
+            'price' => $this->float()->defaultValue(0),
             'keywords' => $this->string(),
             'description' => $this->string(),
             'img' => $this->string(),
-            'hit' => $this->smallInteger(),
-            'new' => $this->smallInteger(),
-            'sale' => $this->smallInteger(),
+            'hit' => $this->smallInteger()->defaultValue(0),
+            'new' => $this->smallInteger()->defaultValue(0),
+            'sale' => $this->smallInteger()->defaultValue(0),
         ]);
     }
 
